@@ -1,0 +1,108 @@
+.Feature_main {
+    width: 100%;
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Feature_child_1 {
+    background-color: #A5EFBB;
+    color: #0FA931;
+    height: fit-content;
+    min-height: 5vh;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 15vh;
+    position: absolute;
+}
+
+.Feature_buttom {
+    width: 150px;
+    height: 35px;
+    position: absolute;
+    bottom: 10vh;
+    right: 7vw;
+    border: none;
+    border-radius: 12px;
+    background-color: #A5EFBB;
+    color: #0FA931;
+    bottom: 10vh;
+    right: 5vh;
+}
+
+.Feature_buttom:hover {
+    cursor: pointer;
+}
+
+.Feature_child_2 {
+    height: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-section {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--Text-color);
+    display: inherit;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 15vh;
+    width: max-content;
+    font-family: Inter;
+    min-width: 25vw;
+}
+
+.form-section select,
+.form-section input {
+    min-width: 25vw;
+    height: 5vh;
+    font-family: Inter;
+}
+
+.result {
+    position: absolute;
+    height: max-content;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: max-content;
+}
+
+.Table-column {
+    width: 50%;
+}
+
+.Table-Header {
+    color: white;
+    text-align: center;
+}
+
+.Table-row {
+    background-color: rgb(190, 163, 215);
+    text-align: center;
+}
+
+.Table-body {
+    height: max-content;
+}
+
+.data-table {
+    height: max-content;
+    width: 50vw;
+}
+@media screen and (max-width:750px) {
+    .data-table {
+            width: 70vw;
+        }
+}
+@media screen and (max-width:550px) {
+    .data-table {
+            width: 90vw;
+        }
+}

@@ -1,0 +1,107 @@
+.Navbar_main {
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    column-gap: 10vw;
+    padding-top: 15px;
+    position: sticky;
+    z-index: 5;
+}
+
+.Navbar_child_1 {
+    flex: 2;
+}
+
+.Navbar_child_1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.Navbar_child_2 {
+    flex: 6;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-left: auto;
+}
+
+.Navbar_child_2_child {
+    width: max-content;
+    height: max-content;
+    color: var(--Text-color);
+    font-family: Inter;
+    font-size: 18px;
+}
+
+.Navbar_child_2_child:hover {
+    cursor: pointer;
+}
+
+.Page_dropdown_menu {
+    width: 200px;
+    height: 250px;
+    position: absolute;
+    top: 12vh;
+    font-family: Inter;
+    color: var(--Text-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    background-color: #b5bce9;
+    z-index: 10;
+}
+
+.Page_dropdown_menu_child:hover {
+    cursor: pointer;
+}
+
+.Mobile_navbar {
+    position: absolute;
+    width: 40vw;
+    height: 35vh;
+    top: 7vh;
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    align-items: center;
+    justify-content: space-evenly;
+    font-family: Inter;
+    text-align: center;
+    flex-direction: column;
+    right: 5vw;
+}
+
+.Menu_icon {
+    display: none;
+    z-index: 3;
+}
+
+/* Media query */
+@media screen and (max-width:540px) {
+    .Navbar_child_2 {
+        display: none;
+    }
+
+    .Navbar_child_1 img {
+        width: 40%;
+    }
+
+    .Page_dropdown_menu {
+        width: 120px;
+        height: 180px;
+        right: 50vw;
+    }
+
+    .Menu_icon {
+        display: block;
+            font-size: 28px;
+            color: var(--Text-color);
+            flex: 0.2;
+            margin-right: 10px;
+    }
+}
