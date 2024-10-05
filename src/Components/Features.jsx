@@ -56,7 +56,7 @@ function Features({ Current_Page }) {
       })
         .then(response => response.json())
         .then(data => {
-          console.log('Success:', data);
+
           setResult(data);
           document.querySelector('.Feature_child_2').style.display = 'none';
         })
