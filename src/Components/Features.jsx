@@ -39,7 +39,7 @@ function Features({ Current_Page }) {
 
   const handleNext = () => {
     if (validateCurrentStep()) {
-      setCurrentStep(prevStep => prevStep + 1);
+      setCurrentStep((prevStep) => prevStep + 1);
     } else {
       alert('Please provide the required data before proceeding.');
     }
@@ -54,13 +54,12 @@ function Features({ Current_Page }) {
         },
         body: JSON.stringify(formData),
       })
-        .then(response => response.json())
-        .then(data => {
-
+        .then((response) => response.json())
+        .then((data) => {
           setResult(data);
           document.querySelector('.Feature_child_2').style.display = 'none';
         })
-        .catch(error => {
+        .catch((error) => {
           console.error('Error:', error);
         });
     } else {
@@ -69,7 +68,7 @@ function Features({ Current_Page }) {
   };
 
   const handleChange = (key, value) => {
-    setFormData(prevData => ({
+    setFormData((prevData) => ({
       ...prevData,
       [key]: value,
     }));
@@ -77,73 +76,79 @@ function Features({ Current_Page }) {
 
   const validateCurrentStep = () => {
     const allData = [
-      ...Object.keys(categoricalData).map(key => ({ type: 'categorical', key, options: categoricalData[key] })),
-      ...Object.keys(binaryData).map(key => ({ type: 'binary', key, options: binaryData[key] })),
-      ...columns.map(column => ({ type: 'column', key: column }))
+      ...Object.keys(categoricalData).map((key) => ({ type: 'categorical', key, options: categoricalData[key] })),
+      ...Object.keys(binaryData).map((key) => ({ type: 'binary', key, options: binaryData[key] })),
+      ...columns.map((column) => ({ type: 'column', key: column }))
     ];
 
     const currentData = allData[currentStep];
-    return formData[currentData.key] !== undefined && formData[currentData.key] !== '';
+    if (!currentData) return false;
+
+    const currentValue = formData[currentData.key];
+
+    if ((currentData.type === 'categorical' || currentData.type === 'binary') && (!currentValue || currentValue === "Select an option")) {
+      alert(`Please select an option for ${currentData.key}`);
+      return false;
+    }
+
+    if (currentData.type === 'column' && (currentValue === undefined || currentValue === '' || isNaN(currentValue))) {
+      alert(`Please provide a valid number for ${currentData.key}`);
+      return false;
+    }
+
+    return true;
   };
 
   const renderStep = () => {
     const allData = [
-      ...Object.keys(categoricalData).map(key => ({ type: 'categorical', key, options: categoricalData[key] })),
-      ...Object.keys(binaryData).map(key => ({ type: 'binary', key, options: binaryData[key] })),
-      ...columns.map(column => ({ type: 'column', key: column }))
+      ...Object.keys(categoricalData).map((key) => ({ type: 'categorical', key, options: categoricalData[key] })),
+      ...Object.keys(binaryData).map((key) => ({ type: 'binary', key, options: binaryData[key] })),
+      ...columns.map((column) => ({ type: 'column', key: column }))
     ];
 
     const currentData = allData[currentStep];
-
     if (!currentData) return null;
 
-    if (currentData.type === 'categorical' || currentData.type === 'binary') {
-      return (
-        <div className="form-section">
-          <label>{currentData.key}</label>
-          <select onChange={(e) => handleChange(currentData.key, e.target.value)}>
+    return (
+      <div className="form-section">
+        <label>{currentData.key}</label>
+        {currentData.type === 'categorical' || currentData.type === 'binary' ? (
+          <select
+            onChange={(e) => handleChange(currentData.key, e.target.value)}
+            value={formData[currentData.key] || ''} 
+          >
             <option value="">Select an option</option>
-            {Array.isArray(currentData.options) && currentData.options.map(option => (
+            {Array.isArray(currentData.options) && currentData.options.map((option) => (
               <option key={option} value={option}>{option}</option>
             ))}
           </select>
-        </div>
-      );
-    }
-
-    if (currentData.type === 'column') {
-      return (
-        <div className="form-section">
-          <label>{currentData.key}</label>
+        ) : (
           <input
-            type='number'
-            step='any'
+            type="number"
+            step="any"
             placeholder={`Enter ${currentData.key} value`}
             onChange={(e) => handleChange(currentData.key, e.target.value)}
+            value={formData[currentData.key] || ''} 
           />
-        </div>
-      );
-    }
-
-    return null;
+        )}
+      </div>
+    );
   };
-
-
 
   const DataTable = ({ data, header }) => {
     return (
       <table className="data-table">
-        <thead className='Table-Header' >
+        <thead className='Table-Header'>
           <tr className='Table-row'>
-            <th className='Table-column'  style={{backgroundColor:'blueviolet'}}>{header}</th>
-            <th className='Table-column'  style={{backgroundColor:'blueviolet'}}>Value</th>
+            <th className='Table-column'>{header}</th>
+            <th className='Table-column'>Value</th>
           </tr>
         </thead>
-        <tbody className="Table-body">
+        <tbody className='Table-body'>
           {Object.entries(data).map(([key, value]) => (
             <tr className='Table-row' key={key}>
-              <td className='Table-column' >{key}</td>
-              <td className='Table-column' >{value}</td>
+              <td className='Table-column'>{key}</td>
+              <td className='Table-column'>{value}</td>
             </tr>
           ))}
         </tbody>
